@@ -25,79 +25,53 @@ In order to determine the IP address from a DNS packet we have to understand how
 * For the rest of the Linux tutorial we will heavily utilize the terminal. To open the terminal, follow the steps below:
 	* Linux
 		* Press the Windows buttons on your keyboard (between control and alt)
-
 ![alt text][windowskey]
-
 		* This will bring you a search window where you will type 'terminal'
-
 ![alt text][terminalwindowlinux]
-
 		* Hit enter on your keyboard and you will get a terminal window.
 	* Mac OS X
 		* Press the Command and Space Bar buttons at the same time
-
 ![alt text][commandspace]
-
 		* Next you will be presented a search bar where you will type terminal
-
 ![alt text][terminalwindowmac]
-
 		* Click Enter and a terminal window should open up
 * Aircrack-ng
 	* To install aircrack-ng on a Linux or Apple computer is very simple. In the terminal enter the following commands:
 		* Ubuntu
 			* `sudo apt-get install aircrack-ng`
-
 ![alt text][aircrackinstalllinux]
-
 		* Mac OS X
 			* `brew install aircrack-ng`
-
 ![alt text][aircrackinstallmac]
-
 				* Please note you will have to install the brew package manager for Mac OS. A link is provided to the installation process for your convenience   
 * Wireshark 
 	* In the terminal enter the following commands for the appropriate operating system.
 		* Ubuntu
 			* `sudo apt-get install Wireshark`
-
 ![alt text][wiresharkinstalllinux]
-
 		* Mac OS X
 			* `brew install Wireshark`
-
 ![alt text][wiresharkinstallmac]
 
 ## Wireless Password Cracking with aircrack-ng
 * Within the terminal type `aircrack-ng`. You will notice output providing some guidance if help is needed.
-
 ![alt text][aircrackmenu]
-
 * Next in the terminal we will make a directory to download the packet capture.
 	* Type `mkdir tutorial` and click enter
 	* Next we will move into the tutorial directory with `cd tutorial`
-
 ![alt text][createdirectory]
-
 * Download the packet capture from the web server
 	* Type `wget http://extra.rwdcr.com/Cersei-01.cap` and click enter. You will notice a bar showing the status of the download.
-
 ![alt text][downloadpacketcapture]
-
 * Here we will attempt to crack the password on the packet capture. Enter the command `aircrack-ng Cersei-01.cap`. You will begin seeing something weird on the prompt. Have no fear. It is attempting several different passwords against the packet capture. (This should go by pretty quickly.) After finally cracking the password we can begin figuring out what data was captured.
-
 ![alt text][aircrackpassword]
 
 ## Identifying Traffic with Wireshark
 * Please note, from here on I will be using the Mac OS X environment. Any differences between the Mac OS X and Linux Wireshark will be explicitly mentioned.
 * First we need to open up Wireshark.
-
 ![alt text][wiresharkwindow]
-
 * Next let’s open the packet capture we downloaded. Click `File > Open` and search for the file downloaded earlier.
-
 ![alt text][openwindow]
-
 	* Double click the packet capture.
 * You should notice  all the traffic seen is 802.11 traffic. You shouldn't be able to decipher any of the data on the window. This is why we need to use the key to see the data. 
 	* Linux
@@ -105,29 +79,17 @@ In order to determine the IP address from a DNS packet we have to understand how
 	* Mac
 		* Click `Wireshark > Preferences`
 	* You should be presented with a window similar to the one below.
-
 ![alt text][wiresharkpreferences]
-
 	* Double click on Protocols in the panel on the left.
-
 ![alt text][wiresharkprotocol]
-
 	* Under the Protocols section look for IEEE 802.11
-
 ![alt text][wireshark80211]
-
 	* Click on the Check box next to 'Enable decryption'.
-
 ![alt text][wiresharkenabledecryption]
-
 	* Click the 'Edit…' button and a window like below will come up. Here we can add the key we retrieved using aricrack-ng 
-
 ![alt text][wiresharkkeys]
-
 	* Click the '+' button and you'll notice a new row is added and we can add the passcode like below. 
-
 ![alt text][wiresharkaddedkeys]
-	
 	* Click 'OK' for the rest of the windows and Wireshark will begin decrypting the wireless packet capture.
 * Because one of our tasks is to determine the IP address of a host with DNS traffic this is where we will start.
 	* In the filter section type `dns` and hit enter twice. This will apply a filter to the traffic so  we can view only DNS traffic.
@@ -156,7 +118,6 @@ In order to determine the IP address from a DNS packet we have to understand how
 	* Next if we look at packet 958 we can see its similar to packet 979 but it says (response). This means the packet received is giving us the answer to our query made in packet 979. If you look below you can see it gives the:
 		* Name: fast.com
 		* Address: 23.11.168.39
-
 ![alt text][wiresharkdnsresponse]
  
 This concludes the tutorial. From here on you should be able to determine a hosts IP address from DNS traffic as well as crack a password on a packet capture. 
