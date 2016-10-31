@@ -25,6 +25,7 @@ In order to determine the IP address from a DNS packet we have to understand how
 * For the rest of the Linux tutorial we will heavily utilize the terminal. To open the terminal, follow the steps below:
 	* Linux
 		* Press the Windows buttons on your keyboard (between control and alt)
+		![alt text][windowskey]
 		* This will bring you a search window where you will type 'terminal'
 		* Hit enter on your keyboard and you will get a terminal window.
 	* Mac OS X
@@ -101,3 +102,5 @@ This concludes the tutorial. From here on you should be able to determine a host
 * https://www.wireshark.org
 * https://www.wireshark.org/#learnWS
 * http://brew.sh
+
+[windowskey] https://github.com/raul5660/Wireless-Password-Cracking-and-Traffic-Analysis/blob/master/image002.png "Windows Key"
