@@ -57,49 +57,45 @@ In order to determine the IP address from a DNS packet we have to understand how
 ## Identifying Traffic with Wireshark
 * Please note, from here on I will be using the Mac OS X environment. Any differences between the Mac OS X and Linux Wireshark will be explicitly mentioned.
 * First we need to open up Wireshark.
-* Next let’s open the packet capture we downloaded. Click File > Open
-* Double click the packet capture.
+* Next let’s open the packet capture we downloaded. Click `File > Open` and search for the file downloaded earlier.
+	* Double click the packet capture.
 * You should notice  all the traffic seen is 802.11 traffic. You shouldn't be able to decipher any of the data on the window. This is why we need to use the key to see the data. 
-* Linux
-* Click Edit > Preferences
-* Mac
-* Click Wireshark > Preferences
-* You should be presented with a window similar to the one below.
-* Double click on Protocols in the panel on the left.
-* Under the Protocols section look for IEEE 802.11
-* Click on the Check box next to 'Enable decryption'.
-* Click the 'Edit…' button and a window like below will come up. Here we can add the key we retrieved using aricrack-ng 
-* Click the '+' button and you'll notice a new row is added and we can add the passcode like below. 
-* Click 'OK' for the rest of the windows and Wireshark will begin decrypting the wireless packet capture.
+	* Linux
+		* Click `Edit > Preferences`
+	* Mac
+		* Click `Wireshark > Preferences`
+	* You should be presented with a window similar to the one below.
+	* Double click on Protocols in the panel on the left.
+	* Under the Protocols section look for IEEE 802.11
+	* Click on the Check box next to 'Enable decryption'.
+	* Click the 'Edit…' button and a window like below will come up. Here we can add the key we retrieved using aricrack-ng 
+	* Click the '+' button and you'll notice a new row is added and we can add the passcode like below. 
+	* Click 'OK' for the rest of the windows and Wireshark will begin decrypting the wireless packet capture.
 * Because one of our tasks is to determine the IP address of a host with DNS traffic this is where we will start.
-* In the filter section type `dns` and hit enter twice. This will apply a filter to the traffic so  we can view only DNS traffic. 
-* Notice the column headings:
-* No. 
-* Represents the packet number.
-* Time.
-* Time from first packet. For example, if we look at the first row Time is 11.507900. This means packet 979 was sent 11.5079 seconds after the first packet in the packet capture.
-* Source
-* This is the source IP. This is the address where the packet originated from.
-* Destination
-* This is the destination IP. This is the address where data is being sent.
-* Protocol.
-* This field displays the format, if you will, of the data.
-* Length.
-* This is the amount of data being sent.
-* Info.
-* This is a brief summary given to us by Wireshark to quicken the analysis process. 
- 
-* In order to view the data, we have to collapse some of the menus to see the queries and answers occur in DNS traffic. Let’s first find the IPv4 Address of fast.com. If you look at the info below on packet 979 you can see under the Domain Name System section, it shows (query). This means your computer is asking the DNS server what the IP address is for fast.com.
- 
-* Next if we look at packet 958 we can see its similar to packet 979 but it says (response). This means the packet received is giving us the answer to our query made in packet 979. If you look below you can see it gives the:
-* Name: fast.com
-* Address: 23.11.168.39
- 
- 
+	* In the filter section type `dns` and hit enter twice. This will apply a filter to the traffic so  we can view only DNS traffic.
+	* Notice the column headings:
+		* No. 
+			* Represents the packet number.
+		* Time
+			* Time from first packet. For example, if we look at the first row Time is 11.507900. This means packet 979 was sent 11.5079 seconds after the first packet in the packet capture.
+		* Source
+			* This is the source IP. This is the address where the packet originated from.
+		* Destination
+			* This is the destination IP. This is the address where data is being sent.
+		* Protocol
+			* This field displays the format, if you will, of the data.
+		* Length
+			* This is the amount of data being sent.
+		* Info
+			* This is a brief summary given to us by Wireshark to quicken the analysis process. 
+	* In order to view the data, we have to collapse some of the menus to see the queries and answers occur in DNS traffic. Let’s first find the IPv4 Address of fast.com. If you look at the info below on packet 979 you can see under the Domain Name System section, it shows (query). This means your computer is asking the DNS server what the IP address is for fast.com.
+	* Next if we look at packet 958 we can see its similar to packet 979 but it says (response). This means the packet received is giving us the answer to our query made in packet 979. If you look below you can see it gives the:
+		* Name: fast.com
+		* Address: 23.11.168.39
  
 This concludes the tutorial. From here on you should be able to determine a hosts IP address from DNS traffic as well as crack a password on a packet capture. 
  
-References
+### References
 * http://aircrack-ng.org
 * https://linux.die.net/man/1/aircrack-ng
 * https://www.wireshark.org
